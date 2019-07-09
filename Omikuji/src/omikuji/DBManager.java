@@ -7,12 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * @author n_imagawa
- *
+ *DBに接続を行うための処理　
  */
 
 public class DBManager {
-
 
 	//接続するためのDBのURL
 	private static final String URL = "jdbc:postgresql://localhost:5432/Kadai";
@@ -26,13 +24,12 @@ public class DBManager {
 	/**
 	 * DBと接続する
 	 *@return DBコネクション
-	 *@throws ClassNotFoundException
-	 *				ドライバクラスが見つからなかった場合
-	 *@throws SQLException
-	 *				DB接続に失敗した場合
+	 *@throws ClassNotFoundException ドライバクラスが見つからなかった場合
+	 *@throws SQLException			 DB接続に失敗した場合
+	 *
+	 *
 	 */
 	public static Connection getconnection() throws ClassNotFoundException, SQLException {
-
 
 		Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
 		System.out.println("DBに接続しました");

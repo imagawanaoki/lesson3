@@ -61,48 +61,62 @@ public class Check {
 	}
 
 	/**
-	 *その日のうちに引いたかどうかの判定
-	 *@param PreparedStatement
-	 *			ステートメントの作成
+	 * @throws NumberFormatException 例外処理
+	 * @throws IOException			例外処理
+	 * @throws SQLException			例外処理
+	 *@param preparedStatement ステートメントの作成
+	 *@param birthday ユーザーに入力された値
+	 *@param uranai_date テーブルに登録されたカラム名
+	 *@param connection DBと接続する
+	 *@return resultSet.getInt("omikuji_id") おみくじを事前に一度引いていた場合以前引いたおみくじコードを返却する
+	 *@return 0 おみくじを一度も引いていなかった場合0を返す
 	 */
 
 	public static int PatternCheck(Date birthday, Date uranai_date, Connection connection,
 			PreparedStatement preparedStatement)
 			throws NumberFormatException, IOException, SQLException {
 
+		//SQLの条件式　引いたか引いてないか
+		String idCheck = "SELECT omikuji_id FROM result WHERE uranai_date = ? AND birthday = ?";
 
+		//ステートメント作成
+		preparedStatement = connection.prepareStatement(idCheck);
+		preparedStatement.setDate(1, uranai_date);
+		preparedStatement.setDate(2, birthday);
 
-			//SQLの条件式　引いたか引いてないか
-			String idCheck = "SELECT omikuji_id FROM result WHERE uranai_date = ? AND birthday = ?";
+		//検索結果の格納,表示
+		ResultSet resultSet = preparedStatement.executeQuery();
 
-			//ステートメント作成
-			preparedStatement = connection.prepareStatement(idCheck);
-			preparedStatement.setDate(1, uranai_date);
-			preparedStatement.setDate(2, birthday);
+		if (resultSet.next() == true) {
+			return resultSet.getInt("omikuji_id");
+		} else {
 
-			//検索結果の格納,表示
-			ResultSet resultSet = preparedStatement.executeQuery();
-
-
-
-			if (resultSet.next() ==true) {
-				return resultSet.getInt("omikuji_id");
-			}else {
-
-				return 0;
-			}
+			return 0;
+		}
 
 	}
+
 	/**
+	 *
 	 *SQL文の実行
+	 *@throws SQLException 例外処理
+	 *@throws SQLException 例外処理
+	 *@param omikuji_id テーブルに登録されているカラム名、おみくじコード
+	 *@param connection DBとの接続を行う
+	 *@param preparedStatement ステートメントの作成
+	 *@return un.get(0)  0を取得した時にunにsetした値をaddする
+	 *setUnsei  Unseiをセットする
+	 *setNegaigoto 	Negaigotoをセットする
+	 *setAkinai 	Akinaiをセットする
+	 *setGakumon Gakumonをセットする
 	 */
 
-	public static Unsei Co(int omikuji_id,Connection connection,PreparedStatement preparedStatement) throws SQLException {
+	public static Unsei Co(int omikuji_id, Connection connection, PreparedStatement preparedStatement)
+			throws SQLException {
 
 		//SQLの用意
 		String join = "SELECT um.unsei_name, omi.gakumon, omi.negaigoto, omi.akinai FROM UnseiMaster um "
 				+ "INNER JOIN Omikuji omi ON um.unsei_id = omi.unsei_id WHERE omi.omikuji_id = ? ";
-
 
 		//SQLをDBに渡す
 		preparedStatement = connection.prepareStatement(join);
@@ -128,15 +142,15 @@ public class Check {
 
 		return un.get(0);
 
-
 	}
 
 	/**
 	 * SQLで乱数を取得
-	 *@param PreparedStatement
-	 *			ステートメントの作成
-	 *@param ResultSet
-	 *		データベースの結果セットを表す
+	 *@param preparedStatement ステートメントの作成
+	 *@param connection DBと接続する
+	 *@throws SQLException 例外処理
+	 *@return pa 獲得した行数を格納
+	 *
 	 */
 
 	public static int Gyo(Connection connection, PreparedStatement preparedStatement) throws SQLException {
@@ -146,7 +160,7 @@ public class Check {
 		//SQLを準備する
 		preparedStatement = connection.prepareStatement(para);
 
-	ResultSet rset = preparedStatement.executeQuery();
+		ResultSet rset = preparedStatement.executeQuery();
 
 		//結果を格納
 		rset.next();
@@ -159,25 +173,28 @@ public class Check {
 	/**
 	 *
 	 *テーブルへの登録処理
-	 *@param PreparedStatement
-	 *			ステートメントの作成
+	 *@throws SQLException 例外処理
+	 *@param preparedStatement ステートメントの作成
+	 *@param connection DBと接続する
+	 *@param omikuji_id  テーブルに登録されているカラム名、おみくじコード
+	 *@param birthday  ユーザーに入力された値
+	 *@param uranai_date テーブルに登録されたカラム名
 
 	 *	 */
 
-	public static void Re(int omikuji_id,Date birthday, Date uranai_date,Connection connection,PreparedStatement preparedStatement) throws SQLException {
+	public static void Re(int omikuji_id, Date birthday, Date uranai_date, Connection connection,
+			PreparedStatement preparedStatement) throws SQLException {
 
 		//テーブルへの登録
 		String insertday = "INSERT INTO result( uranai_date, birthday, omikuji_id) values(?,?,?) ";
-
 
 		preparedStatement = connection.prepareStatement(insertday);
 		preparedStatement.setDate(1, uranai_date);
 		preparedStatement.setDate(2, birthday);
 		preparedStatement.setInt(3, omikuji_id);
 
-		 preparedStatement.executeUpdate();
+		preparedStatement.executeUpdate();
 
 	}
-
 
 }

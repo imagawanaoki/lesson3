@@ -9,20 +9,20 @@ import java.util.Random;
 
 /**
  * @author n_imagawa
- *
+ * おみくじの番号を選出
+ *おみくじを引いていた場合、引いていなかった場合の条件分岐
  */
 public class Omikuji {
 	/**
 	 *
 	* mainメソッド
-	* @param args 使用しない
-	 * @throws Exception
-	 * おみくじの番号を選出
-	 *おみくじを引いていた場合、引いていなかった場合の条件分岐
+	*@param args 使用しない
+	 *@throws Exception 例外処理
+	 *
 	 *
 	*/
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws Exception  {
 
 		String birthday = null;
 		LocalDate date1 = null;

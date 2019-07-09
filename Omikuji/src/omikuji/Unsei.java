@@ -1,7 +1,6 @@
 package omikuji;
 
 /**
- * @author n_imagawa
  *抽象クラスの値の取得を行なっている
  */
 

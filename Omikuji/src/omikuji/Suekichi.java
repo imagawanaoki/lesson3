@@ -3,7 +3,7 @@ package omikuji;
 public class Suekichi extends Unsei {
 
 	/**
-	 * @author n_imagawa
+	 * setUnsei 運勢をSetする
 	 *個別クラス（末吉）
 	 */
 	@Override

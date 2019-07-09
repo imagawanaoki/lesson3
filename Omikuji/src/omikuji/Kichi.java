@@ -3,7 +3,7 @@ package omikuji;
 public class Kichi extends Unsei {
 
 	/**
-	 * @author n_imagawa
+	 *setUnsei 運勢をSetする
 	 *個別クラス（吉）
 	 */
 	@Override

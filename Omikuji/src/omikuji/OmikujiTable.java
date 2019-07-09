@@ -9,8 +9,6 @@ import java.sql.PreparedStatement;
 /**
 *おみくじデータをDBに取り込む
 *PreparedStatementにバインドをする
-*@param preparedStatement
-*				ステートメント情報
 *
 */
 public class OmikujiTable {
