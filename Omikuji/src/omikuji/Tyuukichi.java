@@ -1,15 +1,17 @@
 package omikuji;
 
+/**
+ * 個別クラス（中吉）
+ * setUnsei 運勢をSetする
+ */
+
+
 public class Tyuukichi extends Unsei {
 
-	/**
-	 *setUnsei 運勢をSetする
-	 *個別クラス（中吉）
-	 */
 	@Override
 	public void setUnsei() {
 
-unsei = "中吉";
+		unsei = "中吉";
 
 	}
 }

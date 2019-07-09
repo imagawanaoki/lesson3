@@ -8,9 +8,8 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * @author n_imagawa
  * おみくじの番号を選出
- *おみくじを引いていた場合、引いていなかった場合の条件分岐
+ * おみくじを引いていた場合、引いていなかった場合の条件分岐
  */
 public class Omikuji {
 	/**

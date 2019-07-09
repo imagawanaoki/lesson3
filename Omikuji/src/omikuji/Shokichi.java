@@ -1,16 +1,15 @@
 package omikuji;
 
-public class Shokichi extends Unsei {
+/**
+ *個別クラス（小吉）
+ *setUnsei 運勢をSetする
+ */
 
-	/**
-	 * setUnsei 運勢をSetする
-	 *個別クラス（小吉）
-	 */
+public class Shokichi extends Unsei {
 
 	@Override
 	public void setUnsei() {
 		unsei = "小吉";
 	}
-
 
 }

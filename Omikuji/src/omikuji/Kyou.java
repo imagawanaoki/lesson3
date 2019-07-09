@@ -1,11 +1,12 @@
 package omikuji;
 
-public class Kyou extends Unsei {
+/**
+ *個別クラス（凶）
+ *setUnsei 運勢をSetする
+ */
 
-	/**
-	 *setUnsei 運勢をSetする
-	 *個別クラス（凶）
-	 */
+
+public class Kyou extends Unsei {
 
 	@Override
 	public void setUnsei() {

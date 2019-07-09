@@ -1,11 +1,12 @@
 package omikuji;
 
+/**
+ *個別クラス（吉）
+ *setUnsei 運勢をSetする
+ */
+
 public class Kichi extends Unsei {
 
-	/**
-	 *setUnsei 運勢をSetする
-	 *個別クラス（吉）
-	 */
 	@Override
 	public void setUnsei() {
 

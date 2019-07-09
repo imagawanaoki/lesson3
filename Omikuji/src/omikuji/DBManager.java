@@ -7,9 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- *DBに接続を行うための処理　
+ * DBに接続を行うための処理
+ * @author n_imagawa
+ *
  */
-
 public class DBManager {
 
 	//接続するためのDBのURL
