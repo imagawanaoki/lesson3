@@ -7,7 +7,6 @@ import java.io.InputStreamReader;
 import java.util.Properties;
 
 /**
- * @author n_imagawa
  *文字化け処理
  *プロパティファイルのキーを取得
  */
