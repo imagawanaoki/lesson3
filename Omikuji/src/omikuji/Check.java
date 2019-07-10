@@ -111,11 +111,11 @@ public class Check {
 	 *setGakumon Gakumonをセットする
 	 */
 
-	public static Unsei Co(int omikuji_id, Connection connection, PreparedStatement preparedStatement)
+	public static Unsei CheckOmikuji_id(int omikuji_id, Connection connection, PreparedStatement preparedStatement)
 			throws SQLException {
 
 		//SQLの用意
-		String join = "SELECT um.unsei_name, omi.gakumon, omi.negaigoto, omi.akinai FROM UnseiMaster um "
+		String join = "SELECT um.unsei_name, omi.gakumon, omi.negaigoto, omi.akinai, omi.unsei_id FROM UnseiMaster um "
 				+ "INNER JOIN Omikuji omi ON um.unsei_id = omi.unsei_id WHERE omi.omikuji_id = ? ";
 
 		//SQLをDBに渡す
@@ -130,17 +130,45 @@ public class Check {
 		String akinai = rset.getString("akinai");
 		String negaigoto = rset.getString("negaigoto");
 		String unseiname = rset.getString("unsei_name");
+		int    unsei_id = rset.getInt("unsei_id");
 
-		List<Unsei> un = new ArrayList<Unsei>();
+		Unsei unsei = null;
+		switch (unsei_id) {
 
-		Unsei kichi = new Kichi();
-		kichi.setUnsei(unseiname);
-		kichi.setNegaigoto(negaigoto);
-		kichi.setAkinai(akinai);
-		kichi.setGakumon(gakumon);
-		un.add(kichi);
+		case 1:
+			unsei = new Daikichi();
+			break;
 
-		return un.get(0);
+		case 2:
+			unsei = new Tyuukichi();
+			break;
+
+		case 3:
+			unsei = new Shokichi();
+			break;
+
+		case 4:
+			unsei = new Suekichi();
+			break;
+
+		case 5:
+			unsei = new Kichi();
+			break;
+
+		case 6:
+			unsei = new Kyou();
+			break;
+
+
+		default:
+			break;
+		}
+		unsei.setUnsei(unseiname);
+		unsei.setNegaigoto(negaigoto);
+		unsei.setAkinai(akinai);
+		unsei.setGakumon(gakumon);
+
+			return unsei;
 
 	}
 
@@ -182,7 +210,7 @@ public class Check {
 
 	 *	 */
 
-	public static void Re(int omikuji_id, Date birthday, Date uranai_date, Connection connection,
+	public static void ResistTable(int omikuji_id, Date birthday, Date uranai_date, Connection connection,
 			PreparedStatement preparedStatement) throws SQLException {
 
 		//テーブルへの登録

@@ -54,14 +54,14 @@ public class Omikuji {
 
 			}
 
-			Unsei omikuji = Check.Co(omikuji_id,connection, preparedStatement);
+			Unsei omikuji = Check.CheckOmikuji_id(omikuji_id,connection, preparedStatement);
 			String sb =  omikuji.disp();
 			System.out.println(sb);
 
 
 			//終了メッセージをコンソール上に出力する
 			if (Check.PatternCheck(localList.get(1), localList.get(0), connection, preparedStatement) == 0) {
-				Check.Re(omikuji_id,localList.get(1), localList.get(0),connection, preparedStatement);
+				Check.ResistTable(omikuji_id,localList.get(1), localList.get(0),connection, preparedStatement);
 
 			}
 
